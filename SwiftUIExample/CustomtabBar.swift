@@ -40,6 +40,9 @@ struct CustomTabBar: View {
                     Spacer()
                 }
                 .padding(.bottom)
+                .onChange(of: selectedTab) { newValue in
+                    print("selected tap; \(newValue)")
+                }
             }
         }
         .frame(width: nil, height: nil)
@@ -55,8 +58,9 @@ struct CustomTabBar: View {
     struct FirstTabView: View {
         @Binding var selectedTab: Tab
         var body: some View {
-            Image(selectedTab == .home ? "icons8-Material Rounded-86527-50-ffffff" : "icons8-Material Outlined-83326-50-ffffff")
+            Image(systemName: selectedTab == .home ? "homepod.fill" : "homepod")
                 .foregroundColor(selectedTab == .home ? .purple : .black)
+                .imageScale(.large)
                 .onTapGesture(count: 1) {
                     self.selectedTab = .home
                 }
@@ -67,8 +71,9 @@ struct CustomTabBar: View {
         @Binding var selectedTab: Tab
         @State private var animationSize: Double = 0
         var body: some View {
-            Image(selectedTab == .cards ? "icons8-iOS Glyph-73787-50-ffffff" : "icons8-Simple Small-70077-50-ffffff")
+            Image(systemName: selectedTab == .cards ? "folder.fill" : "folder")
                 .foregroundColor(selectedTab == .cards ? .purple : .black)
+                .imageScale(.large)
                 .scaleEffect(x: 1 + (animationSize / 30), y: 1 + (animationSize / 30), anchor: .center)
                 .animation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 0.5), value: animationSize)
                 .onTapGesture(count: 1) {
@@ -84,8 +89,9 @@ struct CustomTabBar: View {
     struct ThirdTabView: View {
         @Binding var selectedTab: Tab
         var body: some View {
-            Image(selectedTab == .trades ? "icons8-Material Rounded-85134-50-ffffff" : "icons8-Windows 10-22143-50-ffffff" )
+            Image(systemName: selectedTab == .trades ? "paperplane.fill" : "paperplane" )
                 .foregroundColor(selectedTab == .trades ? .purple : .black)
+                .imageScale(.large)
                 .onTapGesture(count: 1) {
                     self.selectedTab = .trades
                 }
